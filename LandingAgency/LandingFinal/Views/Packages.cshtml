@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Packages";
+}
+
+
+<div ng-controller='packageController' >
+    <h1>Packages</h1>
+    <table>
+
+        <tr ng-repeat='elm in packages '>
+            <td style="float: left;">{{elm.Name}}:</td>
+        </tr>
+
+    </table>
+</div>
+

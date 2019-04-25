@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div ng-controller="dbCtrl">
+
+    <table>
+        <tr>
+            <td>Client Type</td>
+            <td>
+                <select id="clientSelect">
+                    <option value="corporate">Corporate</option>
+                    <option value="individual">Individual</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount of Passengers</td>
+            <td><input type="text" id="amOfpass" /></td>
+        </tr>
+        <tr>
+            <td>Duration of the trip</td>
+            <td><input type="text" id="durationTrip" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="searchById" /></td>
+            <td><input type="button" value="Search" ng-click="getPackages()" /></td>
+        </tr>
+    </table>
+    <table id="packageTable">
+        <tr>
+            <td>
+                <b>Package List</b>
+            </td>
+        </tr>
+        <tr ng-repeat="p in packages">
+            <td>{{p.PackageName}}</td>
+            <td><a id="{{p.Id}}" href="" ng-click="AddPackage(p)">Add</a></td>
+            <td><a href="" ng-click="getDetails(p)">Details </a></td>
+
+        </tr>
+    </table>
+    <table id="selectedPackages">
+        <tr>
+            <td>
+                <b>Selected Packages</b>
+            </td>
+        </tr>
+        <tr ng-repeat="p in selectedPackages">
+            <td>{{p.PackageName}}</td>
+            <td><a href="" ng-click="removePackage(p)">Remove</a></td>
+        </tr>
+
+
+
+    </table>
+    <input type="button" value="Calculate commission" />
+    <div ng-view>
+    </div>
+    <script>
+
+    </script>
+</div>

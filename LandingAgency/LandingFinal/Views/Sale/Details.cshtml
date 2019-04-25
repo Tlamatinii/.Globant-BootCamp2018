@@ -1,0 +1,39 @@
+﻿@model LandingFinal.ViewModels.CreateSaleViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Package</h4>
+    <table>
+
+        @foreach (var i in Model.Packages)
+        {
+            foreach (var p in i.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => p.Description)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => p.Type)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => p.Category)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

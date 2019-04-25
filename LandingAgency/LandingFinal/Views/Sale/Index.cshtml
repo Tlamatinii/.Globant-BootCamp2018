@@ -1,0 +1,172 @@
+﻿@model LandingFinal.ViewModels.CreateSaleViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><h2>Travel Agency</h2></center>
+
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Corporative",
+        Value = "Corporative",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Individual",
+        Value = "Individual",
+
+    });
+}
+
+
+<center>
+    <table>
+        <tr>
+            <td><b>Client Type:</b></td>
+            <td>
+                @Html.DropDownListFor(m => m.Client, listItems)
+                @Html.ValidationMessageFor(m => m.Client)
+            </td>
+        </tr>
+        <tr>
+            <td><b>Amount of Passangers:</b></td>
+            <td>
+                @Html.TextBoxFor(m => m.Passangers, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(m => m.Passangers)
+            </td>
+        </tr>
+        <tr>
+            <td><b>Duration of the trip:</b></td>
+            <td>
+                @Html.TextBoxFor(m => m.Nights, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(m => m.Nights)
+            </td>
+        </tr>
+        <tr>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tr>
+        <tr>
+            @using (Html.BeginForm())
+            {
+
+                <td>@Html.TextBox("searchString")</td>
+                <td><input type="submit" value="Search" /></td>
+
+            }
+
+        </tr>
+    </table>
+</center>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Package Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model.Packages)
+    {
+        string selectedRow = "";
+        if (item.Id == ViewBag.InstructorID)
+        {
+            selectedRow = "success";
+        }
+        <tr class="@selectedRow">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PackageName)
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "Detail", new { id = item.Id })
+            </td>
+        </tr>
+        }
+</table>
+@*
+@if (Model.Products != null)
+{
+    <h3>Courses Taught by Selected Instructor</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Department</th>
+        </tr>
+
+        @foreach (var item in Model.Products)
+            {
+                string selectedRow = "";
+                if (item.Id == ViewBag.CourseID)
+                {
+                    selectedRow = "success";
+                }
+                <tr class="@selectedRow">
+                    <td>
+                        @Html.ActionLink("Select", "Index", new { courseID = item.Id })
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @item.Category
+                    </td>
+                </tr>
+            }
+
+        </table>
+}
+*@
+
+@using (Html.BeginForm("Add", "AddPackage"))
+{
+
+    <input type="submit" value="Create" />
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Package Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model.Sales)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nights)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<table>
+    @using (Html.BeginForm("CalculateCommision", "Calculate"))
+    {
+        <tr>
+            <td>
+                <input type="submit" value="Calculate" />
+            </td>
+        </tr>
+    }
+</table>
+
+

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<LandingFinal.Models.Package>
+
+@{
+    ViewBag.Title = "Sale";
+}
+
+
+<center><h2>Index</h2></center>
+
+<div>
+
+    <table>
+        <tr>
+            <td>Client Type</td>
+            <td>
+                <select name="client">
+                    <option value="Corporate">Corporate</option>
+                    <option value="Individual">Individual</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount of Passangers</td>
+            <td><input type="text" name="Passangers" /></td>
+        </tr>
+        <tr>
+            <td>Duration of the trip</td>
+            <td><input type="text" name="Nigths" /></td>
+        </tr>
+        <tr>
+            @using (Html.BeginForm())
+            {
+
+                <td>@Html.TextBox("searchString")</td>
+                <td><input type="submit" value="Search" /></td>
+
+            }
+
+        </tr>
+    </table>
+
+</div>
+
+<br />
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Package Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.ActionLink(item.PackageName, "Details", new { id = item.Id})
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.Id })
+                </td>
+            </tr>
+
+        }
+
+    </table>
+</div>
+<br />
+<div>
+    <input type="submit" value="Add" />
+</div>
+<br />
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Package Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackageName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+
+    </table>
+</div>
+<div>
+    <table>
+        <tr>
+
+
+            <td><input type="submit" class="Calculation" /></td>
+            <td><h5>My Commission is: <label id="total"></label></h5></td>
+        </tr>
+    </table>
+</div>
